@@ -1,14 +1,10 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require 'pry'
 
-require 'dotenv'
-Dotenv.load
-
-require_relative '../lib/abebooksSWS'
+require_relative '../lib/abebooks-sws'
 
 class TestAbebooksSWS < Minitest::Unit::TestCase
-  include AbebooksSWS
+  include Abebooks::SWS
 
   def test_requires_client_key_in_credentials
     assert_raises(Request::MissingClientKey) do
@@ -76,19 +72,5 @@ class TestAbebooksSWS < Minitest::Unit::TestCase
     })
 
     assert_match(/bookcondition=newonly/, url.query)
-  end
-
-  def test_offer_urls_domain_is_converted
-    req = Request.new({
-      clientkey: ENV['CLIENT_KEY']
-    })
-
-    res = req.perform({'isbn' => '0451161351'})
-
-    results = res.convert_offer_urls('www.abebooks.de')
-
-    results['searchResults']['Book'].each do |book|
-      assert_match /www\.abebooks\.de/, book['listingUrl']
-    end
   end
 end
