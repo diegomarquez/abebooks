@@ -59,9 +59,6 @@ res = req.perform(params)
 
 # After getting a response it is necessary to transform the domain of the urls returned by the api
 # from www.abebooks.com, to www.abebooks.de in this case.
-# Doing this will parse the original response using MultiXML, if you want to achieve a similar
-# result with a different parser you have to do it yourself.
-results = res.convert_offer_urls('www.abebooks.de')
 ```
 
 [1]: https://github.com/geemus/excon
