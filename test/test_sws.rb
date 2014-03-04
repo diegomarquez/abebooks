@@ -3,7 +3,7 @@ require 'minitest/pride'
 
 require_relative '../lib/abebooks-sws'
 
-class TestAbebooksSWS < Minitest::Unit::TestCase
+class TestSWS < Minitest::Unit::TestCase
   include SWS
 
   def test_returns_url
