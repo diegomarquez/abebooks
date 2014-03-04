@@ -58,8 +58,7 @@ params = {
 res = SWS.new(ENV['CLIENT_KEY']).perform(params)
 ```
 
-If you intend to get offer urls for a particular domain, after getting a response it is necessary to transform the domain of the urls returned by the api
-from www.abebooks.com(default), to the domain you want (www.abebooks.de in the example above).
+If you intend to get offer urls for a particular domain, after getting a response it is necessary to transform the domain of the urls returned by the api, www.abebooks.com by default, to the domain you want, www.abebooks.de in the example above.
 
 [1]: https://github.com/geemus/excon
 [2]: https://github.com/sferik/multi_xml
