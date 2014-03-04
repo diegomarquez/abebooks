@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path('../lib', __FILE__)
-require 'abebooks-sws/version'
+require 'sws/version'
 
 Gem::Specification.new do |gem|
   gem.name        = 'abebooks-sws'
-  gem.version     = Abebooks::SWS::VERSION
+  gem.version     = SWS::VERSION
   gem.platform    = Gem::Platform::RUBY
   gem.authors     = ['Diego Marquez']
   gem.email       = ['diego.marquez@papercavalier.com']

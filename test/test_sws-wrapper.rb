@@ -4,18 +4,10 @@ require 'minitest/pride'
 require_relative '../lib/abebooks-sws'
 
 class TestAbebooksSWS < Minitest::Unit::TestCase
-  include Abebooks::SWS
-
-  def test_requires_client_key_in_credentials
-    assert_raises(Request::MissingClientKey) do
-      Request.new
-    end
-  end
+  include SWS
 
   def test_returns_url
-    req = Request.new({
-      clientkey: 'sws_client_key'
-    })
+    req = Request.new('sws_client_key')
 
     url = req.url({'Foo' => 'Bar'})
 
@@ -27,34 +19,20 @@ class TestAbebooksSWS < Minitest::Unit::TestCase
   def test_fetches_parsable_response
     Excon.stub({}, { body: '<foo>bar</foo>' })
 
-    req = Request.new({
-      clientkey: 'sws_client_key'
-    })
+    req = Request.new('sws_client_key')
 
     res = req.perform({'isbn' => '666666666'}, mock: true)
     refute_empty res.to_h
     Excon.stubs.clear
   end
 
-  def test_raises_error_if_primary_arguments_are_missing
-    req = Request.new({
-      clientkey: 'sws_client_key'
-    })
-
-    assert_raises(Request::MissingPrimaryArguments) do
-      req.perform
-    end
-  end
-
   def test_nil_and_empty_strings_are_removed_from_the_final_query
-    req = Request.new({
-      clientkey: 'sws_client_key'
-    })
+    req = Request.new(clientkey: 'sws_client_key')
 
     url = req.url({
       'Foo' => 'Bar',
       'Nil' => nil,
-      'EmptyString' => '',
+      'EmptyString' => ''
     })
 
     assert_match(/Foo=Bar/, url.query)
@@ -63,14 +41,8 @@ class TestAbebooksSWS < Minitest::Unit::TestCase
   end
 
   def test_converts_new_bookcondition_search_argument
-    req = Request.new({
-      clientkey: 'sws_client_key'
-    })
-
-    url = req.url({
-      'bookcondition' => 'New',
-    })
-
+    req = Request.new('sws_client_key')
+    url = req.url({ 'bookcondition' => 'New' })
     assert_match(/bookcondition=newonly/, url.query)
   end
 end
