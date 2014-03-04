@@ -15,7 +15,7 @@ Set up a request:
 A client key needs to be provided to make requests to SWS API
 
 ```ruby
-req = AbebooksSWS.new({clientkey:ENV['CLIENT_KEY']})
+req = SWS.new(ENV['CLIENT_KEY'])
 ```
 ### Request
 
@@ -43,7 +43,7 @@ You can also pass the response body into a custom parser:
 MyParser.new(res.body)
 ```
 
-### Getting results for a specific Abebooks domain
+### Getting results for a specific Abebooks country
 
 For example, to get results for abebooks.de you would make the request like this:
 
@@ -55,11 +55,11 @@ params = {
   'destinationcountry' => 'DEU'
 }
 
-res = req.perform(params)
-
-# After getting a response it is necessary to transform the domain of the urls returned by the api
-# from www.abebooks.com, to www.abebooks.de in this case.
+res = SWS.new(ENV['CLIENT_KEY']).perform(params)
 ```
+
+If you intend to get offer urls for a particular domain, after getting a response it is necessary to transform the domain of the urls returned by the api
+from www.abebooks.com(default), to the domain you want (www.abebooks.de in the example above).
 
 [1]: https://github.com/geemus/excon
 [2]: https://github.com/sferik/multi_xml
