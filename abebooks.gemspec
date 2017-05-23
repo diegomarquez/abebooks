@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path('../lib', __FILE__)
+
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'abebooks/version'
 
 Gem::Specification.new do |gem|
@@ -12,7 +13,7 @@ Gem::Specification.new do |gem|
   gem.summary     = 'A Ruby wrapper to the Abebooks SWS API'
   gem.license     = 'MIT'
 
-  gem.files         = Dir.glob('lib/**/*') + %w(LICENSE README.md)
+  gem.files         = Dir.glob('lib/**/*') + %w[LICENSE README.md]
   gem.test_files    = Dir.glob('test/**/*')
   gem.require_paths = ['lib']
 

@@ -2,6 +2,7 @@ require 'excon'
 require 'abebooks/response'
 
 module Abebooks
+  # Runs a search query
   class Request
     def initialize(client_key = ENV['ABEBOOKS_CLIENT_KEY'])
       @client_key = client_key
