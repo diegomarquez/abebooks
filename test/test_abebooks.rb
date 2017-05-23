@@ -1,8 +1,7 @@
 require 'minitest/autorun'
-require 'minitest/pride'
 require_relative '../lib/abebooks'
 
-class TestAbebooks < Minitest::Unit::TestCase
+class TestAbebooks < Minitest::Test
   def setup
     Excon.defaults[:mock] = true
     Excon.stub({}, { body: '<foo>bar</foo>' })
