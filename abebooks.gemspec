@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = Dir.glob('test/**/*')
   gem.require_paths = ['lib']
 
-  gem.add_runtime_dependency 'multi_xml', '~> 0.5.0'
+  gem.add_runtime_dependency 'multi_xml', '~> 0.6.0'
   gem.add_runtime_dependency 'excon'
   gem.add_development_dependency 'minitest', '~> 5.0'
   gem.add_development_dependency 'rake'
