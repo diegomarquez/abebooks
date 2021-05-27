@@ -10,7 +10,7 @@ module Abebooks
     def to_h
       raise HTTPStatus unless ok?
 
-      Ox.load(to_s, mode: :hash)
+      Ox.load(to_s, mode: :hash, symbolize_keys: false)
     end
 
     def ok?
