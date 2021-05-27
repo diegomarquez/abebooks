@@ -1,19 +1,24 @@
-require 'minitest/autorun'
-require_relative '../lib/abebooks'
+# frozen_string_literal: true
+
+require "minitest/autorun"
+require_relative "../lib/abebooks"
 
 class TestAbebooks < Minitest::Test
-  def setup
-    Excon.defaults[:mock] = true
-    Excon.stub({}, body: '<foo>bar</foo>')
+  def test_ok
+    skip unless ENV.key?("ABEBOOKS_CLIENT_KEY")
+
+    request = Abebooks.new
+    response = request.get(author: "Tolkien")
+
+    assert response.ok?
+    refute_empty response.to_h
   end
 
-  def teardown
-    Excon.stubs.clear
-  end
+  def test_unauthorized
+    request = Abebooks.new("foo")
+    response = request.get
 
-  def test_fetches_parsable_response
-    req = Abebooks::Request.new
-    res = req.get(query: {})
-    refute_empty res.to_h
+    refute response.ok?
+    assert_raises { response.to_h }
   end
 end

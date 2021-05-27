@@ -1,11 +1,20 @@
-require 'delegate'
-require 'multi_xml'
+# frozen_string_literal: true
+
+require "delegate"
+require "ox"
 
 module Abebooks
-  # Parses the API response
   class Response < SimpleDelegator
+    class HTTPStatus < StandardError; end
+
     def to_h
-      MultiXml.parse(body)
+      raise HTTPStatus unless ok?
+
+      Ox.load(to_s, mode: :hash)
+    end
+
+    def ok?
+      code == 200
     end
   end
 end

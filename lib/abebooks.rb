@@ -1,7 +1,8 @@
-require 'forwardable'
-require 'abebooks/request'
+# frozen_string_literal: true
 
-# Wrapper to the Abebooks SWS API
+require "forwardable"
+require "abebooks/request"
+
 module Abebooks
   class << self
     extend Forwardable

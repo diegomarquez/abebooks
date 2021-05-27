@@ -10,23 +10,17 @@ Create a request:
 req = Abebooks.new(client_key)
 ```
 
-Run a query:
+Run a query and parse response into a Ruby Hash:
 
 ```ruby
-params = { author: 'Foucault' }
-res = req.get(query: params)
+response = request.get(author: 'Tolkien')
+response.to_h
 ```
 
-Parse the response into a Ruby Hash:
+Or pass the response into a custom parser:
 
 ```ruby
-res.to_h
+MyParser.new(res.to_s)
 ```
 
-Or pass its body into a custom parser:
-
-```ruby
-MyParser.new(res.body)
-```
-
-[1]: http://www.abebooks.com/docs/AffiliateProgram/WebServices/end-user-guide.pdf
+[1]: https://www.abebooks.com/docs/AffiliateProgram/WebServices/end-user-guide.pdf

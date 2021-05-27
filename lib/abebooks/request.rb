@@ -1,22 +1,22 @@
-require 'excon'
-require 'abebooks/response'
+# frozen_string_literal: true
+
+require "http"
+require "abebooks/response"
 
 module Abebooks
-  # Runs a search query
   class Request
-    def initialize(client_key = ENV['ABEBOOKS_CLIENT_KEY'])
+    URL = "https://search2.abebooks.com/search"
+
+    def initialize(client_key = ENV["ABEBOOKS_CLIENT_KEY"])
       @client_key = client_key
     end
 
-    def get(opts)
-      opts.fetch(:query).update('clientkey' => @client_key)
-      Response.new(connection.get(opts))
-    end
+    def get(parameters = {})
+      response = HTTP.use(:auto_inflate)
+        .headers("Accept-Encoding" => "gzip")
+        .get(URL, params: parameters.merge("clientkey" => @client_key))
 
-    private
-
-    def connection
-      Excon.new('http://search2.abebooks.com/search', expects: 200)
+      Response.new(response)
     end
   end
 end
